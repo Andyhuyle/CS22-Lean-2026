@@ -68,14 +68,18 @@ Fill in the `sorry` in the proof below.
 The elimination and introduction rules we talked about in Lectures 4 and 5
 will be very helpful here!
 
-
 -/
 
 @[autograded 3]
 theorem problem_1 : (q ∧ p) ∧ (r ∧ q) → (r ∧ p) := by
-  sorry
+  assume h12
+  eliminate h12 with h1 h2
+  eliminate h1 with hq hp
+  eliminate h2 with hr hq'
+  split_goal
+  {assumption}
+  {assumption}
   done
-
 
 
 /-
@@ -96,10 +100,16 @@ Again, your task is to fill in the `sorry` below to prove this statement.
 
 -/
 
+#truth_table (p → q) → ¬ (p ∧ ¬ q)
 
 @[autograded 3]
 theorem problem_2 : (p → q) → ¬ (p ∧ ¬ q) := by
-  sorry
+  assume hpq
+  assume h
+  eliminate h with hp hnq
+  have hq := hpq hp
+  apply hnq
+  assumption
   done
 
 
@@ -130,5 +140,14 @@ Your task: translate this argument to Lean.
 
 @[autograded 4]
 theorem problem_3 : ((p ∨ q) ∧ (p → r) ∧ (q → s)) → (r ∨ s) := by
-  sorry
+  assume h
+  eliminate h with hpq ha
+  eliminate ha with hpr hqs
+  eliminate hpq with hp hq
+  have hr := hpr hp
+  left
+  assumption
+  have hs := hqs hq
+  right
+  assumption
   done
