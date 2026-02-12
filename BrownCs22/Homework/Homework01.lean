@@ -101,6 +101,7 @@ Again, your task is to fill in the `sorry` below to prove this statement.
 -/
 
 #truth_table (p → q) → ¬ (p ∧ ¬ q)
+#truth_table p ∧ q
 
 @[autograded 3]
 theorem problem_2 : (p → q) → ¬ (p ∧ ¬ q) := by
